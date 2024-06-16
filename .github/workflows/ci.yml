@@ -20,9 +20,6 @@ jobs:
     - name: Validate Gradle wrapper
       run: ./gradlew wrapper --gradle-version 6.8.3
 
-    - name: Run static code analysis
-      run: ./gradlew checkstyleMain
-
     - name: Build with Gradle
       run: ./gradlew build
 
@@ -31,3 +28,16 @@ jobs:
       with:
         name: my-app
         path: build/libs/*.jar
+
+  super-lint:
+    name: Lint code base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
