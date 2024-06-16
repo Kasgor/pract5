@@ -27,3 +27,11 @@ checkstyle {
 checkstyleMain {
     source ='src/main/java'
 }
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.example.Main'
+        )
+    }
+}
